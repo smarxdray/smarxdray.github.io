@@ -3,20 +3,19 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-# title: 呓语驿站
-title: insights
+title: 呓语驿站
 subtitle:
 description: Ray's Blog 
 keywords:
 author: Ray
 language:
-- zh-cn 
+- zh-cn
 - en
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: xray.kim
+url:
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -82,7 +81,9 @@ theme: inside
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: git@github.com:smarxdray/smarxdray.github.io.git
+  # 下方的gh_token会被.travis.yml中sed命令替换
+  repo: https://gh_token@github.com/smarxdray/smarxdray.github.io.git
+  # repository: git@github.com:smarxdray/smarxdray.github.io.git
   branch: master
 
 sitemap:
