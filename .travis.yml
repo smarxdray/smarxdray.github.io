@@ -3,8 +3,8 @@ language: node_js
 # 指定需要sudo权限
 # sudo: required
 # 指定node_js版本
-# node_js: 
-  # - 7.9.0
+node_js: 
+  - 10.16.3
 # 指定缓存模块，可选。缓存可加快编译速度。
 cache:
   directories:
@@ -21,7 +21,7 @@ before_install:
 # Start: Build Lifecycle
 install:
   - npm install
-  - npm install hexo-deployer-git --save
+  # - npm install hexo-deployer-git --save
 
 # 执行清缓存，生成网页操作
 script:
