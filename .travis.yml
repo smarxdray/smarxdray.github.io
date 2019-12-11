@@ -1,10 +1,10 @@
 # 指定语言环境
 language: node_js
 # 指定需要sudo权限
-sudo: required
+# sudo: required
 # 指定node_js版本
-node_js: 
-  - 7.9.0
+# node_js: 
+  # - 7.9.0
 # 指定缓存模块，可选。缓存可加快编译速度。
 cache:
   directories:
@@ -36,3 +36,8 @@ after_script:
   - sed -i "s/gh_token/${GH_TOKEN}/g" ./_config.yml
   - hexo deploy
 # End: Build LifeCycle
+notifications:
+  email:
+    recipients:
+      - r.qian@me.com
+    on_success: never
