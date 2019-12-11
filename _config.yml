@@ -77,15 +77,6 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: inside
 
-# Deployment
-## Docs: https://hexo.io/docs/deployment.html
-deploy:
-  type: git
-  # 下方的gh_token会被.travis.yml中sed命令替换
-  repo: https://gh_token@github.com/smarxdray/smarxdray.github.io.git
-  # repository: git@github.com:smarxdray/smarxdray.github.io.git
-  branch: master
-
 sitemap:
   path: sitemap.xml
   template: ./sitemap_template.xml
@@ -93,3 +84,11 @@ sitemap:
 
 baidusitemap:
   path: baidusitemap.xml
+  
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  # 下方的gh_token会被.travis.yml中sed命令替换
+  repo: https://gh_token@github.com/smarxdray/smarxdray.github.io.git
+  branch: master
