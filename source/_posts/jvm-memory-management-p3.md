@@ -100,7 +100,7 @@ CMS，Concurrent Mark Sweep，并发标记-清除，用于老年代收集。它�
 
 从流程上来，它和CMS很相似。G1采用了化整为零的思想，把一块大的内存划分成很多个域（ Region ），以域为单位进行gc。
 
-{% asset_img regions.jpg "G1对堆划域管理" %}
+{% asset_img regions.png "G1对堆划域管理" %}
 
 可以看到，虽然还保留了新生代和老年代的概念，但它们不再是那样泾渭分明，物理隔离的了，都是region的集合。
 
