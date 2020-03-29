@@ -136,7 +136,11 @@ footer:
   # Set to false to hide theme link.
   # theme: false
 
-  # Custom text.
+  # Custom text..
+  custom: <span id="busuanzi_container_site_pv"> Total 
+            <span id="busuanzi_value_site_pv"></span> Views 
+          </span>
+
   # custom: Hosted by <a target="_blank" rel="external nofollow"
   #   href="https://pages.github.com/"><b>Github Pages</b></a>
 
@@ -385,9 +389,12 @@ pwa:
 # ```bash
 # npm install babel-core babel-preset-env html-minifier uglify-js --save
 # ```
-# plugins:
+plugins:
 #   # Dynamic inject html snippet
 #   - position: # `sidebar` | `post` | `page` | `comments` | `avatar`, can be an array
+  - position: sidebar
+    template: |
+      <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 #     # HTML code
 #     template: |
