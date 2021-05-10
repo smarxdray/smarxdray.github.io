@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+<meta charset="utf-8">
+<title>JVM内存管理(三) - 呓语驿站</title>
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<link rel="canonical" href="http://xray.kim/2020/01/22/jvm-memory-management-p3/">
+<link rel="icon" type="image/x-icon" href="https://p.pstatp.com/origin/fef30000f687eb30cd26">
+<meta name="description" content="前言这是该系列的最后一篇了。本打算和前两篇一样周更，无奈由于各种事由拖到了寒假。博客这件事，还须坚持，坚持，再坚持！ 本文主要结合HotSpot这款流行的JVM实现，主要从分代收集、根枚举和垃圾收集器几个方面做简要介绍。 分代收集在HotSpot中，将堆内存分为新生代和老年代。   其中新生代区域被进一步划分为一块Eden区和两块Survivor区，它们之间的比例为8：1：1。所以我们看，这种设计">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JVM内存管理(三)">
+<meta property="og:url" content="http://xray.kim/2020/01/22/jvm-memory-management-p3/index.html">
+<meta property="og:site_name" content="呓语驿站">
+<meta property="og:description" content="前言这是该系列的最后一篇了。本打算和前两篇一样周更，无奈由于各种事由拖到了寒假。博客这件事，还须坚持，坚持，再坚持！ 本文主要结合HotSpot这款流行的JVM实现，主要从分代收集、根枚举和垃圾收集器几个方面做简要介绍。 分代收集在HotSpot中，将堆内存分为新生代和老年代。   其中新生代区域被进一步划分为一块Eden区和两块Survivor区，它们之间的比例为8：1：1。所以我们看，这种设计">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://xray.kim/2020/01/22/jvm-memory-management-p3/chateau.jpg">
+<meta property="og:updated_time" content="2021-05-10T21:08:59.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM内存管理(三)">
+<meta name="twitter:description" content="前言这是该系列的最后一篇了。本打算和前两篇一样周更，无奈由于各种事由拖到了寒假。博客这件事，还须坚持，坚持，再坚持！ 本文主要结合HotSpot这款流行的JVM实现，主要从分代收集、根枚举和垃圾收集器几个方面做简要介绍。 分代收集在HotSpot中，将堆内存分为新生代和老年代。   其中新生代区域被进一步划分为一块Eden区和两块Survivor区，它们之间的比例为8：1：1。所以我们看，这种设计">
+<meta name="twitter:image" content="http://xray.kim/2020/01/22/jvm-memory-management-p3/chateau.jpg">
+<script type="application/ld+json">[{"@context":"http://schema.org","@type":"WebSite","publisher":{"@type":"Person","name":"Ray","description":"Keen Insights Matter","image":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg"},"url":"http://xray.kim","image":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg","description":"Ray's Blog","author":{"@type":"Person","name":"Ray","description":"Keen Insights Matter","image":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg"},"inLanguage":{"@type":"Language","alternateName":"zh-Hans"}},{"@context":"http://schema.org","@type":"Article","articleSection":"技术","url":"http://xray.kim/2020/01/22/jvm-memory-management-p3/","headline":"JVM内存管理(三)","image":"/2020/01/22/jvm-memory-management-p3/chateau.jpg","datePublished":"2020-01-22T08:57:00.000Z","dateModified":"2021-05-10T21:08:59.241Z","keywords":"JVM","description":"Ray's Blog","publisher":{"@type":"Organization","name":"呓语驿站","logo":{"@type":"ImageObject","url":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg"}},"author":{"@type":"Person","name":"Ray","description":"Keen Insights Matter","image":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg"},"inLanguage":{"@type":"Language","alternateName":"zh-Hans"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://xray.kim/2020/01/22/jvm-memory-management-p3/"},"thumbnailUrl":"/2020/01/22/jvm-memory-management-p3/chateau.jpg"}]</script>
+<link href="//fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat" rel="stylesheet">
+<link href="/styles.e987407a0a9d77c7ba00.css" rel="stylesheet">
+<link rel="stylesheet" href="/theme.6814db2ccf672c87c4fb.css">
+<script src="/config.0b09c15b245932529997.js"></script>
+<script async src="//www.googletagmanager.com/gtag/js?id=UA-00000000-0"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','UA-00000000-0');</script></head>
+<body lang="zh-Hans">
+<is-a></is-a>
+<script src="/runtime.caef73fae70e33459c5a.js"></script>
+<script src="/polyfills.28555e618578fe61f50a.js"></script>
+<script src="/main.1efb2acb62d508679d87.zh-Hans.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+<meta charset="utf-8">
+<title>JVM内存管理(二) - 呓语驿站</title>
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<link rel="canonical" href="http://xray.kim/2019/12/15/jvm-memory-management-p2/">
+<link rel="icon" type="image/x-icon" href="https://p.pstatp.com/origin/fef30000f687eb30cd26">
+<meta name="description" content="前言这一篇来聊一聊内存的回收，即垃圾收集(Garbage Collection)。GC所要解决的主要是以下两个问题：  哪些内存需要回收？ 怎么回收？  下面就以这两个问题为主要线索，介绍垃圾收集相关技术。 哪些内存需要回收？我们先回顾一下JVM运行时数据区域，依照是否在线程间共享，可以将其划分为两类：  独占：PC、虚拟机栈以及本地方法栈 共享：方法区（运行时常量池）、Java堆（对象及数组在此">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JVM内存管理(二)">
+<meta property="og:url" content="http://xray.kim/2019/12/15/jvm-memory-management-p2/index.html">
+<meta property="og:site_name" content="呓语驿站">
+<meta property="og:description" content="前言这一篇来聊一聊内存的回收，即垃圾收集(Garbage Collection)。GC所要解决的主要是以下两个问题：  哪些内存需要回收？ 怎么回收？  下面就以这两个问题为主要线索，介绍垃圾收集相关技术。 哪些内存需要回收？我们先回顾一下JVM运行时数据区域，依照是否在线程间共享，可以将其划分为两类：  独占：PC、虚拟机栈以及本地方法栈 共享：方法区（运行时常量池）、Java堆（对象及数组在此">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://xray.kim/2019/12/15/jvm-memory-management-p2/troye.jpg">
+<meta property="og:updated_time" content="2021-05-10T21:08:59.237Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM内存管理(二)">
+<meta name="twitter:description" content="前言这一篇来聊一聊内存的回收，即垃圾收集(Garbage Collection)。GC所要解决的主要是以下两个问题：  哪些内存需要回收？ 怎么回收？  下面就以这两个问题为主要线索，介绍垃圾收集相关技术。 哪些内存需要回收？我们先回顾一下JVM运行时数据区域，依照是否在线程间共享，可以将其划分为两类：  独占：PC、虚拟机栈以及本地方法栈 共享：方法区（运行时常量池）、Java堆（对象及数组在此">
+<meta name="twitter:image" content="http://xray.kim/2019/12/15/jvm-memory-management-p2/troye.jpg">
+<script type="application/ld+json">[{"@context":"http://schema.org","@type":"WebSite","publisher":{"@type":"Person","name":"Ray","description":"Keen Insights Matter","image":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg"},"url":"http://xray.kim","image":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg","description":"Ray's Blog","author":{"@type":"Person","name":"Ray","description":"Keen Insights Matter","image":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg"},"inLanguage":{"@type":"Language","alternateName":"zh-Hans"}},{"@context":"http://schema.org","@type":"Article","articleSection":"技术","url":"http://xray.kim/2019/12/15/jvm-memory-management-p2/","headline":"JVM内存管理(二)","image":"/2019/12/15/jvm-memory-management-p2/troye.jpg","datePublished":"2019-12-15T13:54:04.000Z","dateModified":"2021-05-10T21:08:59.237Z","keywords":"JVM","description":"Ray's Blog","publisher":{"@type":"Organization","name":"呓语驿站","logo":{"@type":"ImageObject","url":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg"}},"author":{"@type":"Person","name":"Ray","description":"Keen Insights Matter","image":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg"},"inLanguage":{"@type":"Language","alternateName":"zh-Hans"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://xray.kim/2019/12/15/jvm-memory-management-p2/"},"thumbnailUrl":"/2019/12/15/jvm-memory-management-p2/troye.jpg"}]</script>
+<link href="//fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat" rel="stylesheet">
+<link href="/styles.e987407a0a9d77c7ba00.css" rel="stylesheet">
+<link rel="stylesheet" href="/theme.6814db2ccf672c87c4fb.css">
+<script src="/config.0b09c15b245932529997.js"></script>
+<script async src="//www.googletagmanager.com/gtag/js?id=UA-00000000-0"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','UA-00000000-0');</script></head>
+<body lang="zh-Hans">
+<is-a></is-a>
+<script src="/runtime.caef73fae70e33459c5a.js"></script>
+<script src="/polyfills.28555e618578fe61f50a.js"></script>
+<script src="/main.1efb2acb62d508679d87.zh-Hans.js"></script>
+</body>
+</html>

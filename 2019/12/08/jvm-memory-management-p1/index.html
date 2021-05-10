@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+<meta charset="utf-8">
+<title>JVM内存管理(一) - 呓语驿站</title>
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<link rel="canonical" href="http://xray.kim/2019/12/08/jvm-memory-management-p1/">
+<link rel="icon" type="image/x-icon" href="https://p.pstatp.com/origin/fef30000f687eb30cd26">
+<meta name="description" content="前言该系列源自一个月前的技术分享讲稿，稍作整理后记录于此。系列分为3篇，分别是：内存分配、内存回收以及内存管理技术在HotSpot上的具体实现。本篇先来聊一聊JVM中内存的分配。 从虚拟内存说起说起内存，可能大家的第一反映是这个：   从硬件的角度来看，内存就是一块有固定容量的存储体,与该硬件直接打交道的是我们的操作系统。我们知道在操作系统中，进程都是共享CPU和内存资源的。现代操作系统为了更有效">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JVM内存管理(一)">
+<meta property="og:url" content="http://xray.kim/2019/12/08/jvm-memory-management-p1/index.html">
+<meta property="og:site_name" content="呓语驿站">
+<meta property="og:description" content="前言该系列源自一个月前的技术分享讲稿，稍作整理后记录于此。系列分为3篇，分别是：内存分配、内存回收以及内存管理技术在HotSpot上的具体实现。本篇先来聊一聊JVM中内存的分配。 从虚拟内存说起说起内存，可能大家的第一反映是这个：   从硬件的角度来看，内存就是一块有固定容量的存储体,与该硬件直接打交道的是我们的操作系统。我们知道在操作系统中，进程都是共享CPU和内存资源的。现代操作系统为了更有效">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://xray.kim/2019/12/08/jvm-memory-management-p1/taylor.jpg">
+<meta property="og:updated_time" content="2021-05-10T21:08:59.233Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM内存管理(一)">
+<meta name="twitter:description" content="前言该系列源自一个月前的技术分享讲稿，稍作整理后记录于此。系列分为3篇，分别是：内存分配、内存回收以及内存管理技术在HotSpot上的具体实现。本篇先来聊一聊JVM中内存的分配。 从虚拟内存说起说起内存，可能大家的第一反映是这个：   从硬件的角度来看，内存就是一块有固定容量的存储体,与该硬件直接打交道的是我们的操作系统。我们知道在操作系统中，进程都是共享CPU和内存资源的。现代操作系统为了更有效">
+<meta name="twitter:image" content="http://xray.kim/2019/12/08/jvm-memory-management-p1/taylor.jpg">
+<script type="application/ld+json">[{"@context":"http://schema.org","@type":"WebSite","publisher":{"@type":"Person","name":"Ray","description":"Keen Insights Matter","image":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg"},"url":"http://xray.kim","image":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg","description":"Ray's Blog","author":{"@type":"Person","name":"Ray","description":"Keen Insights Matter","image":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg"},"inLanguage":{"@type":"Language","alternateName":"zh-Hans"}},{"@context":"http://schema.org","@type":"Article","articleSection":"技术","url":"http://xray.kim/2019/12/08/jvm-memory-management-p1/","headline":"JVM内存管理(一)","image":"/2019/12/08/jvm-memory-management-p1/taylor.jpg","datePublished":"2019-12-08T19:44:01.000Z","dateModified":"2021-05-10T21:08:59.233Z","keywords":"JVM","description":"Ray's Blog","publisher":{"@type":"Organization","name":"呓语驿站","logo":{"@type":"ImageObject","url":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg"}},"author":{"@type":"Person","name":"Ray","description":"Keen Insights Matter","image":"https://pic1.superbed.cn/item/5df47fe01f8f59f4d6257672.jpg"},"inLanguage":{"@type":"Language","alternateName":"zh-Hans"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://xray.kim/2019/12/08/jvm-memory-management-p1/"},"thumbnailUrl":"/2019/12/08/jvm-memory-management-p1/taylor.jpg"}]</script>
+<link href="//fonts.googleapis.com/css?family=Baloo+Bhaijaan|Inconsolata|Josefin+Sans|Montserrat" rel="stylesheet">
+<link href="/styles.e987407a0a9d77c7ba00.css" rel="stylesheet">
+<link rel="stylesheet" href="/theme.6814db2ccf672c87c4fb.css">
+<script src="/config.0b09c15b245932529997.js"></script>
+<script async src="//www.googletagmanager.com/gtag/js?id=UA-00000000-0"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','UA-00000000-0');</script></head>
+<body lang="zh-Hans">
+<is-a></is-a>
+<script src="/runtime.caef73fae70e33459c5a.js"></script>
+<script src="/polyfills.28555e618578fe61f50a.js"></script>
+<script src="/main.1efb2acb62d508679d87.zh-Hans.js"></script>
+</body>
+</html>
